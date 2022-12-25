@@ -1,0 +1,82 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+
+    </div>
+</div>
+<div class="container-fluid mt--7">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="modal-title">Customer Edit <span class="text-red">{{message}}</span></h5>
+        </div>
+        <!-- <form [formGroup]="addStaffForm" novalidate (ngSubmit)="addStaff(addStaffForm.value)"> -->
+        <form *ngIf="currentCustomer">
+            <div class="card-body">
+                <!-- Profile -->
+                <hr class="my-4" />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <h6 class="heading-small text-muted mb-4">FirstName</h6>
+                        </div>
+                        <div class="col-10"> <input type="text" class="form-control" id="first_name"
+                                [(ngModel)]="currentCustomer.first_name" name="first_name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <h6 class="heading-small text-muted mb-4">LastName</h6>
+                        </div>
+                        <div class="col-10"> <input type="text" class="form-control" id="last_name"
+                                [(ngModel)]="currentCustomer.last_name" name="last_name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <h6 class="heading-small text-muted mb-4">Birthday</h6>
+                        </div>
+                        <div class="col-4"> 
+                            <input type="text" class="form-control" id="birthday" 
+                            [(ngModel)]="currentCustomer.birthday" name="birthday"
+                            />
+                        </div>
+                        <div class="col-2">
+                            <h6 class="heading-small text-muted mb-4">Phone</h6>
+                        </div>
+                        <div class="col-4"> <input type="text" class="form-control" id="phone"
+                                [(ngModel)]="currentCustomer.phone" name="phone" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <h6 class="heading-small text-muted mb-4">Note</h6>
+                        </div>
+                        <div class="col-10"> <input type="text" class="form-control" id="note"
+                                [(ngModel)]="currentCustomer.note" name="note" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Address -->
+                <div class="form-group">
+                    <label>
+                        <h6 class="heading-small text-muted mb-4">Địa chỉ</h6>
+                    </label><span class="text-red">*</span>
+                    <input type="text" class="form-control" id="id-so-nha-duong" name="so-nha-duong"
+                        placeholder="Address..">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="updateCustomer()">Lưu lại</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    routerLink="/customers">Huỷ</button>
+            </div>
+        </form>
+    </div>
+</div>

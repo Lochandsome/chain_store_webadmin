@@ -1,0 +1,125 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+
+    </div>
+</div>
+<div class="container-fluid mt--7">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="modal-title">Customer Create</h5>
+        </div>
+        <!-- <form [formGroup]="addStaffForm" novalidate (ngSubmit)="addStaff(addStaffForm.value)"> -->
+        <form *ngIf="!isCustomerAdded">
+            <div class="card-body">
+                <!-- Profile -->
+                <hr class="my-4" />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <h6 class="heading-small text-muted mb-4">FirstName</h6>
+                        </div>
+                        <div class="col-10">
+                            <input type="text" class="form-control" id="first_name" [(ngModel)]="customer.first_name"
+                                name="first_name">
+                            <span class="text-red">{{messagefirst_name}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <h6 class="heading-small text-muted mb-4">LastName</h6>
+                        </div>
+                        <div class="col-10"> <input type="text" class="form-control" id="last_name"
+                                [(ngModel)]="customer.last_name" name="last_name">
+                                <span class="text-red">{{messagelast_name}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <h6 class="heading-small text-muted mb-4">Birthday</h6>
+                        </div>
+                        <div class="col-4">
+                            <!-- <div class="input-group date" id="datepicker">
+                                <input type="text" class="form-control">
+                                <span class="input-group-append">
+                                    <span class="input-group-text bg-white">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </span>
+                            </div> -->
+                            <input type="date" class="form-control" id="birthday" [(ngModel)]="customer.birthday"
+                                name="birthday" />
+                                <span class="text-red">{{messagebirthday}}</span>
+                            <!-- <button class="btn btn-outline-secondary bi bi-calendar3" type="button"></button> -->
+                        </div>
+                        <div class="col-2">
+                            <h6 class="heading-small text-muted mb-4">Phone</h6>
+                        </div>
+                        <div class="col-4">
+                            <input type="number" maxlength="10" class="form-control" id="phone"
+                                [(ngModel)]="customer.phone" name="phone">
+                                <span class="text-red">{{messagephone}}</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <h6 class="heading-small text-muted mb-4">Birthday</h6>
+                        </div>
+                        <div class="col-4"> <input type="text" class="form-control" id="birthday"
+                                [(ngModel)]="customer.birthday" name="birthday" />
+                        </div>
+                        <div class="col-2">
+                            <h6 class="heading-small text-muted mb-4">Phone</h6>
+                        </div>
+                        <div class="col-4"> <input type="text" class="form-control" id="phone"
+                                [(ngModel)]="customer.phone" name="phone" >
+                        </div>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2">
+                            <h6 class="heading-small text-muted mb-4">Note</h6>
+                        </div>
+                        <div class="col-10"> <input type="text" class="form-control" id="note"
+                                [(ngModel)]="customer.note" name="note">
+                                <span class="text-red">{{messagenote}}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Address -->
+                <div class="form-group">
+                    <label>
+                        <h6 class="heading-small text-muted mb-4">Địa chỉ</h6>
+                    </label><span class="text-red">*</span>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="address" name="address"
+                            placeholder="Số nhà, đường ..." formControlName="address" 
+                            [(ngModel)]="customer.address">
+                            
+                        </div>
+                    <!-- <div class="col-10"> <input type="text" class="form-control" id="note"
+                            [(ngModel)]="customer.address" name="note">
+                    </div> -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="createCustomer()">Lưu lại</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    routerLink="/customers">Huỷ</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $('#datepicker').datepicker();
+
+</script>

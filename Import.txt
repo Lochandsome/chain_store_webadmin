@@ -1,0 +1,36 @@
+ng add @progress/kendo-angular-grid
+npm install --save @progress/kendo-theme-default
+npm install --save @progress/kendo-theme-bootstrap
+
+ng add @progress/kendo-angular-scheduler
+
+npm install -g npm-check-updates
+ncu -u -f /^@progress/
+
+ng add @angular/material
+npm install @material/form-field
+
+npm install @types/jquery --save
+
+//failer
+npm i @syncfusion/ej2-ng-charts
+// dùng revenue này // cần thiết
+npm i chart.js@2.9.4
+
+// date picker range
+
+npm install ngx-daterangepicker-material --save
+npm i ngx-daterangepicker-material@6.0.4
+import trong admin.layout.module.ts
+
+trong tsconfig.app.json thêm:
+"compilerOptions": {
+    "outDir": "./out-tsc/app",
+    "types": ["jquery"],
+    "allowSyntheticDefaultImports":true
+  },
+
+npm install moment
+npm install moment@latest
+
+npm install dayjs

@@ -1,0 +1,69 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--7">
+    <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+            <div class="d-flex justify-content-between">
+                <h4 class="card-title text-uppercase text-muted mb-0">Danh sách Khách hàng</h4>
+                <button class="btn btn-sm btn-default float-right" routerLink="/customersAdd"> <span><i class="ni ni-fat-add"></i></span> Khách
+                    hàng mới </button>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Avatar</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Birthday</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Note</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let curr of customer">
+                            <th scope="row">
+                                <div class="media align-items-center">
+                                    <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
+                                        <img alt="Image placeholder" src="../assets/img/theme/vue.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <span class="mb-0 text-sm">{{curr.first_name}} {{curr.last_name}}</span>
+                                    </div>
+                                </div>
+                            </th>
+                            <td>
+                                {{curr.phone}}
+                            </td>
+                            <td>
+                                {{curr.birthday | date: "dd/MM/yyyy"}}
+                            </td>
+                            <td>
+                                <span class="badge badge-dot mr-4">
+                                    <i class="bg-success"></i> {{curr.address}}
+                                </span>
+                            </td>                            
+                            <td>
+                                <span class="badge badge-dot mr-4">
+                                    <i class="bg-success"></i> {{curr.note}}
+                                </span>
+                            </td> 
+                            <td class="text-right">
+                                <button type="button" class="btn btn-danger" routerLink="/customers/{{curr.id}}">Edit</button>
+                                <button type="button" class="btn btn-warning" (click)="deleteCustomer(curr.id)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

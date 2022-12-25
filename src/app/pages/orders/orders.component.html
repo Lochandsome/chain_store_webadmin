@@ -1,0 +1,129 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="header-body">
+        </div>
+    </div>
+</div>
+<div class="container-fluid mt--7">
+    <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+            <div class="d-flex justify-content-between">
+                <h4 class="card-title text-uppercase text-muted mb-0">Danh sách hoá đơn</h4>
+                <button class="btn btn-sm btn-default float-right" routerLink="/Addoder"> <span><i
+                            class="ni ni-fat-add"></i></span> Tạo hóa đơn</button>
+            </div>
+            <!-- <div class="d-flex justify-content-between">                
+                <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+                    <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
+                      <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="Search" type="text" (focus)="focus = true"
+                        (blur)="focus = false">
+                      </div>
+                    </div>
+                  </form>
+            </div> -->
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">
+                                <input type="text" [(ngModel)]="keyword" (ngModelChange)="changeValueByKeyword(keyword)"
+                                    class="form-control" name="code_keyword">
+                            </th>
+                            <th scope="col">Từ ngày</th>
+                            <th scope="col">
+                                <input type="date" [(ngModel)]="startDate"
+                                    (ngModelChange)="changeValueByStartDate(startDate)" class="form-control"
+                                    name="code_searchStartDate">
+                            </th>
+                            <th scope="col">Đến ngày</th>
+                            <th scope="col">
+                                <input type="date" [(ngModel)]="endDate"
+                                    (ngModelChange)="changeValueByEndDate(endDate)" class="form-control"
+                                    name="code_searchendDate">
+                            </th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Customer Name</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Creator</th>
+                            <th scope="col">Date Creaet</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let billDetail of order">
+                        <tr>
+                            <th scope="row">
+                                <div class="media align-items-center">
+                                    <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
+                                        <img alt="Image placeholder" src="../assets/img/theme/vue.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <span class="mb-0 text-sm">{{billDetail.customerName}}</span>
+                                    </div>
+                                </div>
+                            </th>
+                            <td>
+                                {{billDetail.totalRecord}} / VNĐ
+                            </td>
+                            <td>
+                                <span class="badge badge-dot mr-4">
+                                    <i class="bg-success"></i> {{billDetail.billStatus}}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="avatar-group">
+                                    <a href="javascript:void(0)" class="avatar avatar-sm" data-toggle="tooltip"
+                                        data-original-title="Ryan Tompson">
+                                        <div>
+                                            <img alt="Image placeholder" src="../assets/img/theme/team-1-800x800.jpg"
+                                                class="rounded-circle">
+                                        </div>
+                                    </a>
+                                    <span
+                                        class="mr-2">{{billDetail.orderStaff.fullname}}-{{billDetail.orderStaff.id}}</span>
+                                </div>
+
+                            </td>
+                            <td>
+                                <span class="badge badge-dot mr-4">
+                                    <i class="bg-success"></i>{{billDetail.orderDate | date: "dd/MM/yyyy"}}
+                                </span>
+                            </td>
+                            <td class="text-right">
+                                <div ngbDropdown placement="bottom-right">
+                                    <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow ">
+                                        <a class="dropdown-item" routerLink="/OrderDetail/{{billDetail.id}}">Bill
+                                            Details</a>
+                                        <a class="dropdown-item" (click)="DeleteBill(billDetail.id)">Remove Bill</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
