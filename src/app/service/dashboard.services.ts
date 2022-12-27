@@ -48,4 +48,12 @@ export class DashboardService {
     return this.httpClient.get(this.createCompleteRoute(`${this.urlPartner}/${"GetBetSellingProduct"}`, 
     environment.urlAddress),{ headers: this.headers }).pipe(catchError(this.handleError));
   }
+  GetCalculateLastMonthStore(id: any): Observable<any> {
+    return this.httpClient.get(this.createCompleteRoute(`${this.urlPartner}/${"GetCalculateLastMonthStore"}/${id}`, 
+    environment.urlAddress),{ headers: this.headers }).pipe(catchError(this.handleError));
+  }
+  GetBetSellingProductStore(id: any): Observable<any> {
+    return this.httpClient.get(this.createCompleteRoute(`${this.urlPartner}/${"GetBetSellingProductStore"}/${id}`, 
+    environment.urlAddress),{ headers: this.headers }).pipe(catchError(this.handleError));
+  }
 }

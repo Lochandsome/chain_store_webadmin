@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StoreService } from '../../service/store.service';
 import { StaffService } from '../../service/staff.service';
+import { DashboardService } from '../../service/dashboard.services';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { TimeShift } from 'src/app/models/timeshift.model';
@@ -20,6 +21,7 @@ export class StoreDetailsComponent implements OnInit {
   constructor(private acivteRoute: ActivatedRoute, private storeService: StoreService,
     private staffService: StaffService,
     private router: Router,
+    private dashboardService: DashboardService
 
   ) { }
 
@@ -34,7 +36,12 @@ export class StoreDetailsComponent implements OnInit {
   timeShiftForm: FormGroup | any;
   timestart = [{ hour: 0, minute: 0 }, { hour: 0, minute: 0 }, { hour: 0, minute: 0 }];
   timeend = [{ hour: 13, minute: 30 }, { hour: 13, minute: 30 }, { hour: 13, minute: 30 }];
-
+  //Dashboard
+  //
+  someBill: any;
+  profitLastMonth: any;
+  TopProduct: any;
+  Descen: any;
   ngOnInit(): void {
     this.timeShiftForm = new FormGroup({
       timestart: new FormControl(),
@@ -74,9 +81,37 @@ export class StoreDetailsComponent implements OnInit {
         });
     this.staffService.getStaff(this.idStore as string).subscribe(data => this.arrayStaff = data);
 
-
+  this.GetCalculateLastMonthStore();
+  this.GetBetSellingProductStore();
 
   }
+  GetCalculateLastMonthStore() {
+    this.dashboardService.GetCalculateLastMonthStore(this.idStore)
+      .subscribe(
+        (Status: any) => {
+          this.someBill = Status[0].count;
+          this.profitLastMonth = Status[0].total;          
+        },
+        (error: any) => {
+          console.log(error);
+        });
+  }
+  GetBetSellingProductStore() {
+    this.dashboardService.GetBetSellingProductStore(this.idStore)
+      .subscribe(
+        (Status: any) => {
+          Status.forEach((obj: any) => {
+            if(obj.maxValue != null)
+              this.TopProduct = obj.maxValue.nameProduct;
+            else
+              this.Descen = obj.minValue.nameProduct;
+          });
+        },
+        (error: any) => {
+          console.log(error);
+        });
+  }
+
   clickChooseStaff(idStaff: string) {
     this.router.navigate(["chain-store/detail/", this.idStore, idStaff]);
   }
@@ -91,7 +126,7 @@ export class StoreDetailsComponent implements OnInit {
     console.log(timeWork);
   }
 
-  storeSchedule(){
+  storeSchedule() {
     return platformBrowserDynamic().bootstrapModule(AppModule, { preserveWhitespaces: true }).catch((err) => console.error(err));
   }
 
