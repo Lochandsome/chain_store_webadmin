@@ -28,6 +28,13 @@ export class DashboardComponent implements OnInit {
   dataprofit: any;
   dataProductNumber: any;
   revenueYear: any;
+  //Revenue chart for store
+  labelProfitFS: any;
+  dataprofitFS: any;
+  nameFS: any;
+  RevenueCFS: any;
+  chart_dataset: any = [];
+
   // Revenue chart weeks
   dates: any = " ";
   datee: any = " ";
@@ -62,6 +69,7 @@ export class DashboardComponent implements OnInit {
     this.getRevenueByWeek();
     this.GetCalculateLastMonth();
     this.GetBetSellingProduct();
+    this.GetRevenueForStore();
   }
   GetCalculateLastMonth() {
     this.dashboardService.GetCalculateLastMonth()
@@ -79,7 +87,7 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (Status: any) => {
           Status.forEach((obj: any) => {
-            if(obj.maxValue != null)
+            if (obj.maxValue != null)
               this.TopProduct = obj.maxValue.nameProduct;
             else
               this.Descen = obj.minValue.nameProduct;
@@ -111,8 +119,25 @@ export class DashboardComponent implements OnInit {
           console.log(error);
         });
   }
-  CustomRevenueChart() {
-
+  GetRevenueForStore() {
+    this.dashboardService.GetRevenueForStore()
+      .subscribe(
+        (Status: any) => {
+          this.RevenueCFS = Status;
+          this.labelProfitFS = Status.map(function (obj: any) {
+            return obj.years;
+          });
+          this.dataprofitFS = Status.map(function (obj: any) {
+            return obj.total;
+          });
+          this.nameFS = Status.map(function (obj: any) {
+            return obj.storeName;
+          });
+          this.RevenueChartForStore();
+        },
+        (error: any) => {
+          console.log(error);
+        });
   }
   getSelectDate(selected: any) {
     // var dat = new Date(selected.startDate);
@@ -134,7 +159,7 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         (Status: any) => {
           this.revenueWeek = Status;
-          console.log(this.revenueWeek);
+          //console.log(this.revenueWeek);
           this.labelProfitWeek = Status.map(function (obj: any) {
             return obj.rYear;
           });
@@ -157,19 +182,19 @@ export class DashboardComponent implements OnInit {
       data: {
         labels: this.labelProfit,
         datasets: [{
-          label: 'Doanh thu',
-          data: this.dataprofit,
-          backgroundColor: "#0196FD",
-          borderColor: "#0196FD",
-          borderWidth: 1
-        },
-        {
-          label: 'Doanh số',
-          data: this.dataProductNumber,
-          backgroundColor: "#FFAF00",
-          borderColor: "#FFAF00",
-          borderWidth: 1
-        }]
+            label: 'Doanh thu',
+            data: this.dataprofit,
+            backgroundColor: "#0196FD",
+            borderColor: "#0196FD",
+            borderWidth: 1
+          },
+          {
+            label: 'Doanh số',
+            data: this.dataProductNumber,
+            backgroundColor: "#FFAF00",
+            borderColor: "#FFAF00",
+            borderWidth: 1
+          }]
       },
       options: {
         // scales: {
@@ -177,6 +202,40 @@ export class DashboardComponent implements OnInit {
         //         beginAtZero: true
         //     }
         // }
+      }
+    });
+  }
+  getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  RevenueChartForStore() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+
+    var states: any = Object.values(this.RevenueCFS);
+    for (let i = 1; i < states.length + 1; i++) {
+      this.chart_dataset.push({
+        label: states[i - 1].storeName[0],
+        data: [states[i - 1].total],
+        backgroundColor: color += letters[Math.floor(Math.random() * 16)],
+        borderColor: color += letters[Math.floor(Math.random() * 16)],
+        fill: false,
+        borderWidth: 1
+      });
+    }
+    console.log(this.chart_dataset);
+    var myChartWeek = new Chart("myChartForStore", {
+      type: 'bar',
+      data: {
+        datasets: this.chart_dataset
+        //labels: ['2022', '2022'],
+      },
+      options: {
       }
     });
   }

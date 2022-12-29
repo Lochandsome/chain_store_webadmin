@@ -56,4 +56,9 @@ export class DashboardService {
     return this.httpClient.get(this.createCompleteRoute(`${this.urlPartner}/${"GetBetSellingProductStore"}/${id}`, 
     environment.urlAddress),{ headers: this.headers }).pipe(catchError(this.handleError));
   }
+  GetRevenueForStore(): Observable<any> {
+    return this.httpClient.get(this.createCompleteRoute(`${this.urlPartner}/${"GetRevenueForStore"}`, 
+    environment.urlAddress),{ headers: this.headers }).pipe(catchError(this.handleError));
+  }
+  
 }
